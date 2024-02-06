@@ -35,7 +35,7 @@ const PatientSignIn = () => {
             console.log("User signed in:", userCredential.user);
 
             // Redirect to patient dashboard or home page
-            navigate("/AppointmentPage");
+            navigate("/DoctorList");
         } catch (error) {
             alert("Error signing in, Please make sure you have an account with us or Connected to Internet")
             console.error("Error signing in, Please make sure you have an account with us!", error.message);

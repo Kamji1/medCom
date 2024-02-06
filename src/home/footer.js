@@ -119,7 +119,7 @@ const Footer = () => {
               />
               <Button
                 type="submit"
-                variant="contained"
+                // variant="contained"
                 startIcon={<SendIcon />}
                 sx={sendButton}
               >

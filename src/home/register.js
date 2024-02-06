@@ -10,19 +10,31 @@ import {
   Typography,
 } from "@mui/material";
 import { boldRaleway, button, cardMedia, raleway } from "./styles";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 
 const Register = () => {
+
+  useEffect(() => {
+    AOS.init({
+      duration: 400,
+      easing: 'ease',
+      once: false,
+    });
+  }, []);
+
   return (
-    <Grid container spacing={4} id="register">
+    <Grid container style={{ marginTop: "3%" }} spacing={4} id="register" data-aos="fade-up">
       {/* REGISTER AS DOCTOR */}
       <Grid item xs={12} md={6}>
         <CardActionArea component="a" href="#">
           <Card sx={{ display: "flex" }}>
             <CardContent sx={{ flex: 1, fontFamily: "Raleway" }}>
-              <Typography component="h1" variant="h4" sx={boldRaleway}>
+              <Typography component="h1" variant="h4" color="grey" sx={boldRaleway}>
                 Register as a Doctor
               </Typography>
-              <Typography variant="h5" paragraph sx={raleway}>
+              <Typography variant="h6" paragraph color="rgb(190, 190, 190)" sx={raleway}>
                 Sign Up to provide consultations to patients
               </Typography>
 
@@ -40,7 +52,7 @@ const Register = () => {
             <CardMedia
               component="img"
               sx={cardMedia}
-              image="images/doctor.jpg"
+              image="images/doct.jpg"
               alt="Doctor"
             />
           </Card>
@@ -52,10 +64,10 @@ const Register = () => {
         <CardActionArea component="a" href="#">
           <Card sx={{ display: "flex" }}>
             <CardContent sx={{ flex: 1 }}>
-              <Typography component="h1" variant="h4" sx={boldRaleway}>
+              <Typography component="h1" variant="h4" color="grey" sx={boldRaleway}>
                 Register as a Patient
               </Typography>
-              <Typography variant="h5" paragraph sx={raleway}>
+              <Typography variant="h6" paragraph color="rgb(190, 190, 190)" sx={raleway}>
                 Sign Up to book appointments with doctors
               </Typography>
               <Button sx={button} component={Link} to="/PatientSignUp">
@@ -71,7 +83,7 @@ const Register = () => {
             <CardMedia
               component="img"
               sx={cardMedia}
-              image="images/patient.jpg"
+              image="images/sick.jpg"
               alt="Patient"
             />
           </Card>
@@ -79,15 +91,15 @@ const Register = () => {
       </Grid>
 
       {/* ADMIN LOGIN */}
-      <Grid item xs={12}>
+      <Grid item xs={12} data-aos="fade-in">
         <CardActionArea component="a" href="#">
-          <Card sx={{ display: "flex" }}>
+          <Card sx={{ display: "flex", boxShadow: "red" }}>
             <CardContent sx={{ flex: 1 }}>
-              <Typography component="h1" variant="h4" sx={boldRaleway}>
+              <Typography component="h1" variant="h4" color="grey" sx={boldRaleway}>
                 Sign in as an Admin
               </Typography>
-              <Typography variant="h5" paragraph sx={raleway}>
-                Only verified admins of Medicare can login using the email ID
+              <Typography variant="h6" paragraph color="rgb(190, 190, 190)" sx={raleway}>
+                Only verified admins of MedCom can login using the email ID
                 provided to them
               </Typography>
 
@@ -100,7 +112,7 @@ const Register = () => {
             <CardMedia
               component="img"
               sx={cardMedia}
-              image="images/admin.jpg"
+              image="images/admin.png"
               alt="Admin"
             />
           </Card>

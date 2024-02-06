@@ -5,6 +5,7 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -32,6 +33,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

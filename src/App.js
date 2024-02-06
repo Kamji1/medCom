@@ -12,7 +12,8 @@ import PostPage from "./My_admin/post";
 //patient
 import PatientSignUp from "./patient/signup";
 import PatientSignIn from "./patient/signin";
-import AppointmentPage from "./patient/send_appoint";
+import DoctorList from "./patient/doc_list";
+// import AppointmentForm from "./patient/send_appoint";
 import ReportPage from "./patient/report";
 
 //doctor
@@ -51,7 +52,8 @@ function App() {
           {/* PATIENT */}
           <Route path="/PatientSignUp" element={<PatientSignUp />} />
           <Route path="/PatientSignIn" element={<PatientSignIn />} />
-          <Route path="/AppointmentPage" element={<AppointmentPage />} />
+          <Route path="/DoctorList" element={<DoctorList />} />
+          {/* <Route path="/AppointmentForm " element={<AppointmentForm />} /> */}
           <Route path="/ReportPage" element={<ReportPage />} />
 
           {/* DOCTOR */}

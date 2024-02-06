@@ -1,10 +1,15 @@
+
 // NAVBAR SECTION
 
+
 export const titleToolbar = {
-  borderBottom: 1,
-  borderColor: "divider",
-  backgroundColor: "#3284be",
+  // borderBottom: 1,
+  // borderColor: "divider",
+
+  background: "transparent",
+  // backgroundImage: `grey`,
   color: "#ffffff",
+
 };
 
 export const title = {
@@ -16,20 +21,20 @@ export const title = {
 export const navbarToolbar = {
   justifyContent: "space-between",
   overflowX: "auto",
-  backgroundColor: "#d7e8f4",
+  backgroundColor: "fff",
 };
 
 export const link = {
   p: 1,
   flexShrink: 0,
   textDecoration: "none",
-  color: "#3284be",
+  color: "white",
   fontWeight: "bold",
   textTransform: "uppercase",
   fontFamily: "Raleway",
   "&:hover": {
-    backgroundColor: "#3284be",
-    color: "#ffffff",
+    // backgroundColor: "#E9F1FA",
+    color: "#11a2d7",
   },
 };
 
@@ -37,38 +42,39 @@ export const link = {
 
 export const headerPaper = {
   position: "relative",
-  backgroundColor: "grey.800",
+  backgroundColor: "transparent",
   color: "#fff",
   mb: 4,
-  backgroundSize: "cover",
-  backgroundRepeat: "no-repeat",
-  backgroundPosition: "center",
-  backgroundImage: `url('images/home.jpg')`,
+
+  height: "100vh"
 };
 
 export const headerBox = {
   position: "relative",
   p: { xs: 3, md: 6 },
   pr: { md: 0 },
+  mt: 20,
 };
 
 export const raleway = {
-  fontFamily: "Raleway",
+  fontFamily: "Arial, 'Helvetica Neue', Helvetica, sans-serif",
 };
 
 // REGISTER SECTION
 
 export const button = {
-  backgroundColor: "#3284be",
-  color: "#ffffff",
+  backgroundColor: "#11a2d7",
+  border: "1px solid #e5f3fa",
+  color: "white",
   margin: "1%",
   fontFamily: "Raleway",
   fontWeight: "bold",
   "&:hover": {
-    backgroundColor: "#d7e8f4",
-    color: "#3284be",
+    backgroundColor: "#E9F1FA",
+    color: "#11a2d7",
   },
 };
+
 
 export const cardMedia = {
   width: 160,
@@ -95,7 +101,7 @@ export const aboutPaper = {
   backgroundSize: "cover",
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center",
-  backgroundImage: `url('images/doctors.jpg')`,
+  backgroundImage: `url('images/ban.jpg')`,
 };
 
 export const box = {
@@ -137,7 +143,7 @@ export const card = {
 
 export const footerBox = {
   py: 1,
-  backgroundColor: "#3284be",
+  backgroundColor: "grey",
   color: "#ffffff",
 };
 
@@ -153,7 +159,7 @@ export const footerTitle = {
 };
 
 export const sendButton = {
-  color: "#3284be",
+  color: "#11a2d7",
   backgroundColor: "#ffffff",
   fontFamily: "Raleway",
   fontWeight: "bold",

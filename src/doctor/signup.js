@@ -11,12 +11,13 @@ import {
     Box,
     Grid,
     Typography,
-
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { auth } from "../firebase";
+
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { collection, addDoc, getFirestore } from "firebase/firestore";
 
 const theme = createTheme();
 
@@ -30,6 +31,9 @@ const ProfessionalSignUp = () => {
     const [licenseNumber, setLicenseNumber] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
     const navigate = useNavigate();
+
+
+    // ...
 
     const handleSignUp = async (e) => {
         e.preventDefault();
@@ -46,6 +50,24 @@ const ProfessionalSignUp = () => {
                 password
             );
             updateProfile(auth.currentUser, { displayName: email });
+
+            // Save user information to Firestore
+            const db = getFirestore();
+            const doctorsCollection = collection(db, "doctors");
+
+            const doctorData = {
+                firstName,
+                lastName,
+                email,
+                specialization,
+                licenseNumber,
+                // Add other fields as needed
+            };
+
+            // Use addDoc to add a new document to the "doctors" collection
+            const docRef = await addDoc(doctorsCollection, doctorData);
+
+            console.log("Document written with ID: ", docRef.id);
 
             // Additional logic after signup
             console.log("User signed up:", userCredential.user);
@@ -224,3 +246,13 @@ const ProfessionalSignUp = () => {
 };
 
 export default ProfessionalSignUp;
+
+
+
+
+
+
+
+
+
+

@@ -53,7 +53,7 @@ const PatNavbar = () => {
             <AppBar position="static">
                 <Toolbar className="d-flex justify-content-between align-items-center">
                     <Typography variant="h6" component="div" sx={{ display: { xs: "none", md: "flex" } }}>
-                        Dashboard
+                        Patient Dashboard
                     </Typography>
                     <div className={`d-flex align-items-center ${isLargeScreen ? '' : 'd-none'}`}>
                         {user && (
@@ -62,7 +62,7 @@ const PatNavbar = () => {
                             </span>
                         )}
 
-                        <Button color="inherit" component={user ? Link : 'div'} to={user ? "/AppointmentPage" : null} disabled={!user} className="ms-2">
+                        <Button color="inherit" component={user ? Link : 'div'} to={user ? "/DoctorList" : null} disabled={!user} className="ms-2">
                             Make Appointment
                         </Button>
                         <Button color="inherit" component={user ? Link : 'div'} to={user ? "/ReportPage" : null} disabled={!user} className="ms-2">

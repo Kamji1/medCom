@@ -1,103 +1,166 @@
 import React, { useState, useEffect } from 'react';
-import { getDatabase, ref, onValue, remove, query, orderByChild, equalTo } from 'firebase/database';
-import { Container, Typography, Paper, Button, TextField } from '@mui/material';
+import {
+    Container,
+    Typography,
+    Button,
+    Card,
+    CardContent,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogActions,
+    IconButton,
+} from '@mui/material';
+import { getFirestore, collection, getDocs, doc, updateDoc, query, where } from 'firebase/firestore';
 import DocNavbar from './navbar';
+import CancelIcon from '@mui/icons-material/Cancel';
+import Swal from 'sweetalert2';
 
 const AppointPage = () => {
-    const [patientName, setPatientName] = useState('');
-    const [patientEmail, setPatientEmail] = useState('');
-    const [patientRequests, setPatientRequests] = useState([]);
+    const [appointmentRequests, setAppointmentRequests] = useState([]);
+    const [selectedAppointment, setSelectedAppointment] = useState(null);
+    const [openModal, setOpenModal] = useState(false);
 
     useEffect(() => {
-        const db = getDatabase();
-        const appointmentsRef = ref(db, 'appointments');
+        const fetchAppointmentRequests = async () => {
+            const db = getFirestore();
+            const appointmentsCollection = collection(db, 'appointments');
+            const doctorId = 'Vb9KNTKurxLg2GIPysea'; // Replace with the actual doctor's ID
 
-        // Create a query to fetch appointments based on patient's name and email
-        const appointmentsQuery = query(
-            appointmentsRef,
-            orderByChild('patientName'),
-            equalTo(patientName)
-        );
+            const q = query(appointmentsCollection, where('doctorId', '==', doctorId));
+            const appointmentsSnapshot = await getDocs(q);
 
-        // Listen for changes to the appointments node in the database
-        onValue(appointmentsQuery, (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                // Convert the object of objects to an array of objects
-                const requestsArray = Object.keys(data).map((key) => ({
-                    id: key,
-                    ...data[key],
-                }));
-                setPatientRequests(requestsArray);
-            } else {
-                setPatientRequests([]);
-            }
-        });
+            const appointmentData = [];
+            appointmentsSnapshot.forEach((doc) => {
+                const data = doc.data();
+                appointmentData.push({
+                    id: doc.id,
+                    patientName: data.patientName,
+                    patientEmail: data.patientEmail,
+                    patientWhatsApp: data.patientWhatsApp,
+                    status: data.status,
+                });
+            });
 
-        // Clean up the listener when the component unmounts
-        return () => {
-            // Remove the listener
+            setAppointmentRequests(appointmentData);
         };
-    }, [patientName]);
 
-    const handleDeleteRequest = (id) => {
-        const db = getDatabase();
-        const appointmentsRef = ref(db, `appointments/${id}`);
-        // Remove the appointment request with the specified ID
-        remove(appointmentsRef);
+        fetchAppointmentRequests();
+    }, []);
+
+    const handleApproveReject = async (status) => {
+        if (!selectedAppointment) {
+            return;
+        }
+
+        try {
+            const db = getFirestore();
+            const appointmentsCollection = collection(db, 'appointments');
+            const appointmentRef = doc(appointmentsCollection, selectedAppointment.id);
+
+            await updateDoc(appointmentRef, { status });
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Appointment Updated',
+                text: `Appointment request from ${selectedAppointment.patientName} ${status === 'approved' ? 'approved' : 'rejected'}.`,
+            });
+
+            setSelectedAppointment(null);
+            setOpenModal(false);
+        } catch (error) {
+            console.error('Error updating appointment status: ', error);
+        }
+    };
+
+    const handleCancelModal = () => {
+        setSelectedAppointment(null);
+        setOpenModal(false);
     };
 
     return (
         <>
             <DocNavbar />
-            <Container component="main" maxWidth="md">
-                <Paper elevation={3} style={{ padding: '20px', marginTop: '20px' }}>
-                    <Typography variant="h5" gutterBottom>
-                        Patient Appointment Request
-                    </Typography>
-                    {/* <TextField
-                        label="Patient's Name"
-                        variant="outlined"
-                        fullWidth
-                        value={patientName}
-                        onChange={(e) => setPatientName(e.target.value)}
-                        style={{ marginBottom: '10px' }}
-                    />
-                    <TextField
-                        label="Patient's Email"
-                        variant="outlined"
-                        fullWidth
-                        value={patientEmail}
-                        onChange={(e) => setPatientEmail(e.target.value)}
-                        style={{ marginBottom: '10px' }}
-                    /> */}
-                    {patientRequests.length > 0 ? (
-                        <ul>
-                            {patientRequests.map((request) => (
-                                <li key={request.id}>
-                                    <Typography>
-                                        Name: {request.patientName}
-                                        <br />
-                                        Email: {request.patientEmail}
-                                        <br />
-                                        WhatsApp: {request.patientWhatsApp}
-                                    </Typography>
-                                    <Button
-                                        variant="outlined"
-                                        color="error"
-                                        onClick={() => handleDeleteRequest(request.id)}
-                                        style={{ marginTop: '10px' }}
-                                    >
-                                        Delete
-                                    </Button>
-                                    <hr />
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <Typography>No patient requests</Typography>
-                    )}
-                </Paper>
+
+            <Container component="main" maxWidth="md" style={{ marginTop: '20px' }}>
+                <Typography variant="h5" gutterBottom>
+                    Appointment Requests
+                </Typography>
+                {appointmentRequests.map((appointment) => (
+                    <Card key={appointment.id} style={{ marginBottom: '16px' }}>
+                        <CardContent>
+                            <Typography variant="h6" gutterBottom>
+                                {appointment.patientName}
+                            </Typography>
+                            <Typography variant="body1" color="textSecondary">
+                                Email: {appointment.patientEmail}
+                            </Typography>
+                            <Typography variant="body1" color="textSecondary">
+                                WhatsApp Link: {appointment.patientWhatsApp}
+                            </Typography>
+                            <Typography variant="body1" color="#2e4493" >
+                                Status: {appointment.status}
+                            </Typography>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={() => {
+                                    setSelectedAppointment(appointment);
+                                    setOpenModal(true);
+                                }}
+                                style={{ marginTop: '8px' }}
+                            >
+                                View Details
+                            </Button>
+                        </CardContent>
+                    </Card>
+                ))}
+
+                <Dialog open={openModal} onClose={handleCancelModal} >
+                    <DialogTitle>
+                        Appointment Details for {selectedAppointment?.patientName}
+                        <IconButton
+                            edge="end"
+                            color="inherit"
+                            onClick={handleCancelModal}
+                            aria-label="close"
+                            style={{ position: 'absolute', right: 8, top: 8 }}
+                        >
+                            <CancelIcon />
+                        </IconButton>
+                    </DialogTitle>
+                    <DialogContent>
+                        {selectedAppointment && (
+                            <>
+                                <Typography variant="body1" color="textSecondary">
+                                    Email: {selectedAppointment.patientEmail}
+                                </Typography>
+                                <Typography variant="body1" color="textSecondary">
+                                    WhatsApp Link: {selectedAppointment.patientWhatsApp}
+                                </Typography>
+                                <Typography variant="body1" color="textSecondary">
+                                    Status: {selectedAppointment.status}
+                                </Typography>
+                            </>
+                        )}
+                    </DialogContent>
+                    <DialogActions>
+                        <Button
+                            variant="contained"
+                            color="success"
+                            onClick={() => handleApproveReject('approved')}
+                        >
+                            Approve
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color="error"
+                            onClick={() => handleApproveReject('rejected')}
+                        >
+                            Reject
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </Container>
         </>
     );

@@ -23,11 +23,13 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { auth } from "../firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { collection, addDoc, getFirestore } from "firebase/firestore";
 
 
 const theme = createTheme();
 
 const PatientSignUp = () => {
+    const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -54,11 +56,34 @@ const PatientSignUp = () => {
             );
             updateProfile(auth.currentUser, { displayName: email });
 
+            // Save user information to Firestore
+            const db = getFirestore();
+            const patientsCollection = collection(db, "patients");
+
+            const patientData = {
+                fullName,
+                email,
+                gender,
+                presentSickness,
+                dob,
+                maritalStatus,
+                hasDisorder,
+                // Add other fields as needed
+            };
+
+            // Use addDoc to add a new document to the "doctors" collection
+            const patRef = await addDoc(patientsCollection, patientData);
+
+            console.log("Document written with ID: ", patRef.id);
+
             // Additional logic after signup
             console.log("User signed up:", userCredential.user);
 
             // Redirect to patient dashboard or login page
+            console.log("Processing");
             navigate("/PatientSignIn");
+            console.log("Redirect success");
+
         } catch (error) {
             console.error("Error signing up", error.message);
             // Handle error and show appropriate feedback to the user
@@ -113,6 +138,17 @@ const PatientSignUp = () => {
                             Patient Sign Up
                         </Typography>
                         <Box component="form" onSubmit={handleSignUp} sx={{ mt: 1, width: "100%" }}>
+                            <TextField
+                                autoComplete="fullname"
+                                name="fullName"
+                                required
+                                fullWidth
+                                id="fullName"
+                                label="Full Name"
+                                autoFocus
+                                value={fullName}
+                                onChange={(e) => setFullName(e.target.value)}
+                            />
                             <TextField
                                 margin="normal"
                                 required

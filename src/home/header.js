@@ -1,34 +1,41 @@
 import React from "react";
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import { box, headerBox, headerPaper, raleway, subtitle } from "./styles";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 
 const Header = () => {
+
+  useEffect(() => {
+    AOS.init({
+      duration: 400,
+      easing: 'ease',
+      once: false,
+    });
+  }, []);
   return (
-    <Paper sx={headerPaper}>
+    <Paper sx={headerPaper} id="#home">
       {/* Increase the priority of the hero background image */}
       {
-        <img
-          style={{ display: "none" }}
-          src={process.env.PUBLIC_URL + "images/home.jpg"}
-          alt="MedCore"
-        />
+
       }
-      <Box sx={box} />
+      {/* <Box sx={box} /> */}
 
       {/* Text above image */}
       <Grid container>
         <Grid item md={6}>
-          <Box sx={headerBox}>
+          <Box sx={headerBox} data-aos="fade-up-right">
             <Typography
               component="h1"
               variant="h3"
-              color="inherit"
+              color="#11a2d7"
               gutterBottom
               sx={subtitle}
             >
               "We are here for your care..."
             </Typography>
-            <Typography variant="h5" color="inherit" paragraph sx={raleway}>
+            <Typography variant="h5" color="#FAF9F6" paragraph sx={raleway}>
               You dont know whats wrong with you, You are in the right place
             </Typography>
           </Box>

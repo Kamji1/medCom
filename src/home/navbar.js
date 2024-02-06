@@ -8,33 +8,38 @@ const Navbar = (props) => {
   return (
     <React.Fragment id="">
       {/* TITLE */}
-      <Toolbar sx={titleToolbar}>
-        <Typography
-          variant="h3"
-          color="inherit"
-          align="center"
-          noWrap
-          sx={title}
-        >
-          MEDCOM
-        </Typography>
-      </Toolbar>
 
-      {/* LINKS TO VARIOUS SECTIONS */}
-      <Toolbar component="nav" variant="dense" sx={navbarToolbar}>
-        {sections.map((section) => (
-          <Link
-            color="inherit"
+      <div >
+        <Toolbar sx={titleToolbar}>
+          {/* <Box sx={box} /> */}
+          <Typography
+            variant="h3"
+            color="#e5f3fa"
+            align="start"
             noWrap
-            key={section.title}
-            variant="h6"
-            href={section.url}
-            sx={link}
+            sx={title}
           >
-            {section.title}
-          </Link>
-        ))}
-      </Toolbar>
+            MEDCOM
+          </Typography>
+          <Toolbar component="nav" variant="dense" sx={navbarToolbar}>
+            {sections.map((section) => (
+              <Link
+                color="inherit"
+                noWrap
+                key={section.title}
+                variant="h6"
+                href={section.url}
+                sx={link}
+              >
+                {section.title}
+              </Link>
+            ))}
+          </Toolbar>
+        </Toolbar>
+
+        {/* LINKS TO VARIOUS SECTIONS */}
+
+      </div>
     </React.Fragment>
   );
 };

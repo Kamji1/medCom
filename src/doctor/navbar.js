@@ -57,7 +57,7 @@ const DocNavbar = () => {
             <AppBar position="static">
                 <Toolbar className="d-flex justify-content-between align-items-center">
                     <Typography variant="h6" component="div" sx={{ display: { xs: "none", md: "flex" } }}>
-                        Dashboard
+                        Doctor Dashboard
                     </Typography>
                     <div className={`d-flex align-items-center ${isLargeScreen ? '' : 'd-none'}`} >
                         {user && <span className="pe-4">signed in as {user.email}</span>}

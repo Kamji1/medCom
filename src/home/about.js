@@ -8,10 +8,21 @@ import {
   raleway,
   headerBox,
 } from "./styles";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 
 const About = () => {
+
+  useEffect(() => {
+    AOS.init({
+      duration: 400,
+      easing: 'ease',
+      once: false,
+    });
+  }, []);
   return (
-    <div id="about">
+    <div id="about" >
       <Typography
         component="h1"
         variant="h5"
@@ -29,12 +40,13 @@ const About = () => {
           <b> Let's together bring a change in the medical industry!</b>
         </i>
       </Typography>
-      <Paper sx={aboutPaper}>
+      <Paper sx={aboutPaper} data-aos="fade-up"
+        data-aos-anchor-placement="top-bottom">
         {/* Increase the priority of the hero background image */}
         {
           <img
             style={{ display: "none" }}
-            src={process.env.PUBLIC_URL + "images/doctors.jpg"}
+            src={process.env.PUBLIC_URL + "images/ban.jpg"}
             alt="Doctors"
           />
         }
@@ -51,7 +63,7 @@ const About = () => {
                 gutterBottom
                 sx={subtitle}
               >
-                "Trusted Professionals"
+                "<span style={{ color: "#11a2d7" }}>Trusted</span> Professionals"
               </Typography>
               <Typography variant="h5" color="inherit" paragraph sx={raleway}>
                 Consult one of the best doctors just by a click!
