@@ -21,6 +21,8 @@ const AppointPage = () => {
     const [selectedAppointment, setSelectedAppointment] = useState(null);
     const [openModal, setOpenModal] = useState(false);
 
+
+
     useEffect(() => {
         const fetchAppointmentRequests = async () => {
             const db = getFirestore();

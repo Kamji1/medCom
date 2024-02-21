@@ -1,6 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import './App.css';
 import React from "react";
+// import { useEffect } from 'react';
+// import { getMessaging, getToken, onMessage } from 'firebase/messaging'; // Import messaging functions
+// import { auth } from './firebase';
 import Home from "./home/mhome";
 // ADMIN
 import AdminSignIn from "./My_admin/admin";
@@ -36,6 +39,32 @@ import MainComponent from "./chat/comp";
 
 
 function App() {
+
+  //NOTIFICATION
+  // useEffect(() => {
+  //   // Initialize Firebase messaging
+  //   const messaging = getMessaging();
+
+  //   // Request permission for receiving notifications
+  //   messaging.requestPermission().then(() => {
+  //     console.log('Notification permission granted.');
+
+  //     // Get the FCM token
+  //     return getToken(messaging);
+  //   }).then((token) => {
+  //     console.log('FCM token:', token);
+  //   }).catch((error) => {
+  //     console.error('Error getting FCM token:', error);
+  //   });
+
+  //   // Listen for incoming messages
+  //   onMessage(messaging, (message) => {
+  //     console.log('Message received:', message);
+  //   });
+  // }, []);
+
+
+
   return (
     <div>
       <BrowserRouter>

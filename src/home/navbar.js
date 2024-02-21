@@ -14,7 +14,7 @@ const Navbar = (props) => {
           {/* <Box sx={box} /> */}
           <Typography
             variant="h3"
-            color="#e5f3fa"
+            color="#11a2d7"
             align="start"
             noWrap
             sx={title}
