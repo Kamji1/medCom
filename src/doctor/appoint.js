@@ -12,6 +12,7 @@ import {
     IconButton,
 } from '@mui/material';
 import { getFirestore, collection, getDocs, doc, updateDoc, query, where } from 'firebase/firestore';
+import { useAuth } from '../AuthContext'; // Import the authentication context hook
 import DocNavbar from './navbar';
 import CancelIcon from '@mui/icons-material/Cancel';
 import Swal from 'sweetalert2';
@@ -20,16 +21,18 @@ const AppointPage = () => {
     const [appointmentRequests, setAppointmentRequests] = useState([]);
     const [selectedAppointment, setSelectedAppointment] = useState(null);
     const [openModal, setOpenModal] = useState(false);
-
-
+    const { currentUser } = useAuth(); // Get the currently signed-in user from your authentication context
 
     useEffect(() => {
         const fetchAppointmentRequests = async () => {
+            if (!currentUser) return; // Check if user is signed in
+
             const db = getFirestore();
             const appointmentsCollection = collection(db, 'appointments');
-            const doctorId = 'Vb9KNTKurxLg2GIPysea'; // Replace with the actual doctor's ID
 
-            const q = query(appointmentsCollection, where('doctorId', '==', doctorId));
+            // Query appointments where patientEmail matches the email of the currently signed-in doctor
+            const q = query(appointmentsCollection, where('doctorEmail', '==', currentUser.email));
+
             const appointmentsSnapshot = await getDocs(q);
 
             const appointmentData = [];
@@ -48,7 +51,8 @@ const AppointPage = () => {
         };
 
         fetchAppointmentRequests();
-    }, []);
+    }, [currentUser]);
+
 
     const handleApproveReject = async (status) => {
         if (!selectedAppointment) {

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import './App.css';
 import React from "react";
+import { AuthProvider } from './AuthContext';
 // import { useEffect } from 'react';
 // import { getMessaging, getToken, onMessage } from 'firebase/messaging'; // Import messaging functions
 // import { auth } from './firebase';
@@ -66,36 +67,37 @@ function App() {
 
 
   return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          {/* ADMIN */}
-          <Route path="/AdminSignIn" element={<AdminSignIn />} />
-          <Route path="/AdminPortal" element={<AdminPortal />} />
-          <Route path="/AdminHomePage" element={<AdminHomePage />} />
-          <Route path="/AdminReportPage" element={<AdminReportPage />} />
-          <Route path="/PostPage" element={<PostPage />} />
+    <AuthProvider>
+      <div>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            {/* ADMIN */}
+            <Route path="/AdminSignIn" element={<AdminSignIn />} />
+            <Route path="/AdminPortal" element={<AdminPortal />} />
+            <Route path="/AdminHomePage" element={<AdminHomePage />} />
+            <Route path="/AdminReportPage" element={<AdminReportPage />} />
+            <Route path="/PostPage" element={<PostPage />} />
 
 
-          {/* PATIENT */}
-          <Route path="/PatientSignUp" element={<PatientSignUp />} />
-          <Route path="/PatientSignIn" element={<PatientSignIn />} />
-          <Route path="/DoctorList" element={<DoctorList />} />
-          {/* <Route path="/AppointmentForm " element={<AppointmentForm />} /> */}
-          <Route path="/ReportPage" element={<ReportPage />} />
+            {/* PATIENT */}
+            <Route path="/PatientSignUp" element={<PatientSignUp />} />
+            <Route path="/PatientSignIn" element={<PatientSignIn />} />
+            <Route path="/DoctorList" element={<DoctorList />} />
+            {/* <Route path="/AppointmentForm " element={<AppointmentForm />} /> */}
+            <Route path="/ReportPage" element={<ReportPage />} />
 
-          {/* DOCTOR */}
-          <Route path="/ProfessionalSignUp" element={<ProfessionalSignUp />} />
-          <Route path="/ProfessionalSignIn" element={<ProfessionalSignIn />} />
-          <Route path="/AppointPage" element={<AppointPage />} />
+            {/* DOCTOR */}
+            <Route path="/ProfessionalSignUp" element={<ProfessionalSignUp />} />
+            <Route path="/ProfessionalSignIn" element={<ProfessionalSignIn />} />
+            <Route path="/AppointPage" element={<AppointPage />} />
 
-          {/* CHAT */}
-          <Route path="/Chat" element={<Chat />} />
-          <Route path="/MainComponent" element={<MainComponent />} />
+            {/* CHAT */}
+            <Route path="/Chat" element={<Chat />} />
+            <Route path="/MainComponent" element={<MainComponent />} />
 
 
-          {/* ADMIN ROUTE 
+            {/* ADMIN ROUTE 
           <Route
             exact
             path="/admin/dashboard"
@@ -112,9 +114,10 @@ function App() {
           />
 
           <Route exact path="/admin_signin" component={Admin_Signin} /> */}
-        </Routes>
-      </BrowserRouter>
-    </div>
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </AuthProvider>
   );
 }
 

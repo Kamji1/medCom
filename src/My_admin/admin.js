@@ -15,8 +15,8 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-// import { auth } from "../firebase";
-// import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const theme = createTheme();
 
@@ -25,17 +25,30 @@ const AdminSignIn = () => {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();  // Use useNavigate hook
 
-    const handleSignIn = (e) => {
+    const handleSignIn = async (e) => {
         e.preventDefault();
 
         // Hardcoded admin credentials
-        const AdminEmail = "admin";
-        const AdminPassword = "admin";
+        // const AdminEmail = "admin";
+        // const AdminPassword = "admin";
 
-        if (email === AdminEmail && password === AdminPassword) {
+        // if (email === AdminEmail && password === AdminPassword) {
+        //     navigate("/Adminportal");
+        // } else {
+        //     alert('Admin not approved'); // Show alert for unauthorized admin
+        // }
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+            // Additional logic after sign-in
+            console.log("User signed in:", userCredential.user);
+
+            // Redirect to patient dashboard or home page
             navigate("/Adminportal");
-        } else {
-            alert('Admin not approved'); // Show alert for unauthorized admin
+        } catch (error) {
+            alert("Error signing in, Please make sure you have an account with us or Connected to Internet")
+            console.error("Error signing in, Please make sure you have an account with us!", error.message);
+            // Handle error and show appropriate feedback to the user
         }
     };
 

@@ -30,7 +30,7 @@ const AdminPortal = () => {
                 console.error('Error fetching data:', err);
 
                 // Set the error state
-                setError('Error fetching data. Please try again.');
+                setError('Error fetching data. Please wait or refresh .');
             } finally {
                 // Set loading to false whether fetching was successful or not
                 setLoading(false);
@@ -78,6 +78,7 @@ const AdminPortal = () => {
                                                         <TableCell>Last Name</TableCell>
                                                         <TableCell>Email</TableCell>
                                                         <TableCell>Specialization</TableCell>
+                                                        <TableCell>license Number</TableCell>
                                                     </TableRow>
                                                 </TableHead>
                                                 <TableBody>
@@ -88,6 +89,7 @@ const AdminPortal = () => {
                                                             <TableCell>{doctor.lastName}</TableCell>
                                                             <TableCell>{doctor.email}</TableCell>
                                                             <TableCell>{doctor.specialization}</TableCell>
+                                                            <TableCell>{doctor.licenseNumber}</TableCell>
                                                         </TableRow>
                                                     ))}
                                                 </TableBody>
