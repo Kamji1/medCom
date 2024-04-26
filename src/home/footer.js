@@ -77,7 +77,7 @@ const Footer = () => {
           </Grid>
 
           {/* CONTACTS */}
-          <Grid xs={12} md={4}>
+          <Grid xs={12} md={4} >
             <Typography variant="h6" gutterBottom sx={footerTitle}>
               Contact us
             </Typography>
@@ -85,9 +85,10 @@ const Footer = () => {
               <EmailIcon />
               <Typography variant="body2">
                 {" "}
-                Chikamjidivine@gmail.com{" "}
+                MedCom@gmail.com{" "}
               </Typography>
             </IconButton>
+            <Typography variant="body2"> ... </Typography>
             <IconButton href="#" sx={iconButton}>
               <PhoneIcon />
               <Typography variant="body2"> +91-9999 999 999 </Typography>

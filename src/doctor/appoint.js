@@ -104,9 +104,7 @@ const AppointPage = () => {
                             <Typography variant="body1" color="textSecondary">
                                 WhatsApp Link: {appointment.patientWhatsApp}
                             </Typography>
-                            <Typography variant="body1" color="#2e4493" >
-                                Status: {appointment.status}
-                            </Typography>
+
                             <Button
                                 variant="contained"
                                 color="primary"
@@ -118,6 +116,7 @@ const AppointPage = () => {
                             >
                                 View Details
                             </Button>
+                            <Button style={{ float: 'right', fontSize: "bolder" }}>Status: {appointment.status}</Button>
                         </CardContent>
                     </Card>
                 ))}

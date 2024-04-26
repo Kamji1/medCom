@@ -20,7 +20,7 @@ const Header = () => {
       {
 
       }
-      {/* <Box sx={box} /> */}
+      {/* {<Box sx={box} />} */}
 
       {/* Text above image */}
       <Grid container>
@@ -36,7 +36,7 @@ const Header = () => {
               "We are here for your care..."
             </Typography>
             <Typography variant="h5" color="#FAF9F6" paragraph sx={raleway}>
-              You dont know whats wrong with you, You are in the right place
+              You dont know what is wrong with you? You are in the right place
             </Typography>
           </Box>
         </Grid>

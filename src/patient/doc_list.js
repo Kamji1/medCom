@@ -123,7 +123,7 @@ const DoctorList = () => {
 
                 {selectedDoctor && (
                     <Dialog open={openModal} onClose={handleCloseModal} fullWidth maxWidth="sm">
-                        <DialogTitle>{`Appointment Request for Dr. ${selectedDoctor.firstName}`}</DialogTitle>
+                        <DialogTitle>Appointment Request </DialogTitle>
                         <DialogContent>
                             {/* Display doctor details and form fields here */}
                             <Typography variant="h5" gutterBottom>

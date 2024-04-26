@@ -28,21 +28,12 @@ const AdminSignIn = () => {
     const handleSignIn = async (e) => {
         e.preventDefault();
 
-        // Hardcoded admin credentials
-        // const AdminEmail = "admin";
-        // const AdminPassword = "admin";
-
-        // if (email === AdminEmail && password === AdminPassword) {
-        //     navigate("/Adminportal");
-        // } else {
-        //     alert('Admin not approved'); // Show alert for unauthorized admin
-        // }
         try {
+
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
             // Additional logic after sign-in
             console.log("User signed in:", userCredential.user);
-
             // Redirect to patient dashboard or home page
             navigate("/Adminportal");
         } catch (error) {

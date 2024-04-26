@@ -3,6 +3,7 @@ import React from 'react';
 import { Container } from '@mui/material';
 import Navbar from './navbar';
 import Header from './header';
+import WhoWeAreSection from './intro';
 import Register from './register';
 import About from './about';
 import Testimonials from './testimonials';
@@ -41,11 +42,13 @@ const Home = () => {
         <Navbar sections={sections} />
         {/* HEADER COMPONENT - image with tagline */}
         <Header />
+
       </div>
       <Container maxWidth="lg" >
 
 
         <main>
+          <WhoWeAreSection />
 
           {/* REGISTER COMPONENT - signup/signin for doctor/patient */}
           <Register />

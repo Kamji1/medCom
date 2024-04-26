@@ -25,7 +25,7 @@ const Register = () => {
   }, []);
 
   return (
-    <Grid container style={{ marginTop: "3%" }} spacing={4} id="register" data-aos="fade-up">
+    <Grid container style={{ marginTop: "3%", marginBottom: "5%", justifyContent: "center" }} spacing={4} id="register" data-aos="fade-up">
       {/* REGISTER AS DOCTOR */}
       <Grid item xs={12} md={6}>
         <CardActionArea component="a" href="#">
@@ -91,7 +91,7 @@ const Register = () => {
       </Grid>
 
       {/* ADMIN LOGIN */}
-      <Grid item xs={12} data-aos="fade-in">
+      <Grid item xs={12} md={10} data-aos="fade-in">
         <CardActionArea component="a" href="#">
           <Card sx={{ display: "flex", boxShadow: "red" }}>
             <CardContent sx={{ flex: 1 }}>

@@ -6,6 +6,7 @@ import { AuthProvider } from './AuthContext';
 // import { getMessaging, getToken, onMessage } from 'firebase/messaging'; // Import messaging functions
 // import { auth } from './firebase';
 import Home from "./home/mhome";
+import WhoWeAreSection from "./home/intro";
 // ADMIN
 import AdminSignIn from "./My_admin/admin";
 import AdminPortal from "./My_admin/admin_port";
@@ -72,6 +73,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/WhoWeAreSection" element={<WhoWeAreSection />} />
             {/* ADMIN */}
             <Route path="/AdminSignIn" element={<AdminSignIn />} />
             <Route path="/AdminPortal" element={<AdminPortal />} />
